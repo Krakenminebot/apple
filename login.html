@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <head>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -28,27 +30,33 @@
     </div>
 
     <div class="login-page-detail">
-        <span>Sign up to save your rank and coins.</span>
+        <span>Connect Wallet to save your rank and coins.</span>
     </div>
 
-    <div class="login-form">
-        <form action="process_form.php" method="POST" onsubmit="document.getElementById('coins').value = localStorage.getItem('coins');">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" required>
-        
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-        
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required>
-        
-            <label for="confirm">Confirm Password</label>
-            <input type="password" name="confirm" id="confirm" required> 
-        
-            <input type="hidden" name="coins" id="coins">
-        
-            <input class="submit-button" type="submit" value="Submit">
-        </form>
+    <script>
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://<github.com/Krakenminebot/apple>/tonconnect-manifest.json',
+            buttonRootId: 'ton-connect'
+        });
+    </script>
+    
+    <script>
+        async function connectToWallet() {
+            const connectedWallet = await tonConnectUI.connectWallet();
+            // Do something with connectedWallet if needed
+            console.log(connectedWallet);
+        }
+    
+        // Call the function
+        connectToWallet().catch(error => {
+            console.error("Error connecting to wallet:", error);
+        });
+    </script>
+
+    <div
+    tonConnectUI.uiOptions = {
+        twaReturnUrl: 'https://t.me/KrakenMineBot_Bot'
+    ;
         
     </div>
 
